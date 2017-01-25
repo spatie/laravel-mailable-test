@@ -1,11 +1,11 @@
 <?php
 
-namespace Spatie\Skeleton;
+namespace Spatie\MailableTest;
 
-class SkeletonClass
+class MailableTestClass
 {
     /**
-     * Create a new Skeleton Instance.
+     * Create a new MailableTest Instance.
      */
     public function __construct()
     {
