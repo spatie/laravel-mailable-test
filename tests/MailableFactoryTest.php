@@ -2,10 +2,10 @@
 
 namespace Spatie\MailableTest\Test;
 
-class ExampleTest extends \PHPUnit_Framework_TestCase
+class MailableFactoryTest extends TestCase
 {
     /** @test */
-    public function true_is_true()
+    public function it_test()
     {
         $this->assertTrue(true);
     }

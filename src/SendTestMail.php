@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Spatie\MailableTest;
 
 use App\Services\MailableFactory;
 use Exception;

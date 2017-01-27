@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace Spatie\MailableTest;
 
 use Exception;
 use Illuminate\Contracts\Mail\Mailable;
