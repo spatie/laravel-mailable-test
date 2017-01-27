@@ -2,10 +2,10 @@
 
 namespace Spatie\MailableTest;
 
-use App\Services\MailableFactory;
+use Mail;
 use Exception;
 use Illuminate\Console\Command;
-use Mail;
+use App\Services\MailableFactory;
 
 class SendTestMail extends Command
 {

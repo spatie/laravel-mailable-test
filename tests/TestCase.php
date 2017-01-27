@@ -2,10 +2,7 @@
 
 namespace Spatie\MailableTest\Test;
 
-use Event;
-use Artisan;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Spatie\UptimeMonitor\UptimeMonitorServiceProvider;
 
 abstract class TestCase extends Orchestra
 {
