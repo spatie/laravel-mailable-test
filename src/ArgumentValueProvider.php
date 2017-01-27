@@ -4,5 +4,5 @@ namespace Spatie\MailableTest;
 
 interface ArgumentValueProvider
 {
-    public function getValue($argumentName, $argumentType);
+    public function getValue($argumentType, $argumentName);
 }

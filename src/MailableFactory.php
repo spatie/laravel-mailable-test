@@ -42,11 +42,13 @@ class MailableFactory
 
         return collect($parameters)
             ->map(function (ReflectionParameter $reflectionParameter) {
-                return $this->getArgumentValue($reflectionParameter->getType()->getName());
+                return $this->getArgumentValue(
+                    $reflectionParameter->getType()->getName()
+                );
             });
     }
 
-    protected function getArgumentValue(string $type)
+    public function getArgumentValue(string $type, string $argumentName)
     {
         if ($type === 'int') {
             return faker()->numberBetween(1, 100);
@@ -69,7 +71,7 @@ class MailableFactory
         return $argumentValue;
     }
 
-    protected function getModelInstance(Model $model)
+    public function getModelInstance(Model $model)
     {
         $model = $model->first();
 
