@@ -4,6 +4,7 @@ namespace Spatie\MailableTest;
 
 use Faker\Generator;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MailableTest\Exceptions\CouldNotDetermineValue;
 
 class ArgumentValueProvider
 {
@@ -41,13 +42,12 @@ class ArgumentValueProvider
 
     protected function getModelInstance(Model $model)
     {
-        $model = $model->first();
+        $modelInstance = $model->first();
 
-        if (! $model) {
-            $modelClass = get_class($model);
-            throw new Exception("Could not find a model of class `{$modelClass}`.");
+        if (! $modelInstance) {
+            throw CouldNotDetermineValue::noModelInstanceFound($model);
         }
 
-        return $model;
+        return $modelInstance;
     }
 }

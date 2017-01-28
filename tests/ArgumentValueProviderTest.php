@@ -2,8 +2,8 @@
 
 namespace Spatie\MailableTest\Test;
 
-use Illuminate\Database\Eloquent\Model;
 use Spatie\MailableTest\ArgumentValueProvider;
+use Spatie\MailableTest\Exceptions\CouldNotDetermineValue;
 
 class ArgumentValueProviderTest extends TestCase
 {
@@ -63,5 +63,13 @@ class ArgumentValueProviderTest extends TestCase
         $this->assertInstanceOf(TestModel::class, $value);
 
         $this->assertEquals('my model', $value->name);
+    }
+
+    /** @test */
+    public function it_will_throw_an_exception_if_an_instance_of_model_cannot_be_determined()
+    {
+        $this->expectException(CouldNotDetermineValue::class);
+
+        $this->argumentValueProvider->getValue('myModel', TestModel::class);
     }
 }
