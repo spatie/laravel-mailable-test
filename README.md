@@ -10,8 +10,8 @@
 
 This package provides an artisan command that can send a mailable to an mail-address. It can be used like this:
 
-```php
-mail:send-test "App\Mail\MyMailable" recipent@mail.com
+```bash
+php artisan mail:send-test "App\Mail\MyMailable" recipent@mail.com
 ```
 
 The given mailable will be sent to the given recipient. Any parameters the `__construct` method of the mailable class expect will be generated.
