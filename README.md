@@ -63,6 +63,18 @@ return [
 
 ## Usage
 
+To send any mailable issue this artisan command:
+
+```bash
+php artisan mail:send-test "App\Mail\MyMailable" recipent@mail.com
+```
+
+This will send the given mailable to the given mail-address. The to-, cc- and bcc-address that may be set in the given mailable will be cleared. The mail will only be sent to the mail-address given in the artisan command.
+
+The package will provide a value for any typehinted argument of the constructor of the mailable. If a argument is a `int`, `string` or `bool` the package will generated a value using [Faker](https://github.com/fzaninotto/Faker). Any argument that typehints an Eloquent model will receive the first record of that model. For all arguments that have a class typehint an argument will be generated using the container.
+
+## Customizing the values passed to the mailable constructor
+
 
 
 ## Changelog
