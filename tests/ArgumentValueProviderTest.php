@@ -72,4 +72,12 @@ class ArgumentValueProviderTest extends TestCase
 
         $this->argumentValueProvider->getValue('myModel', TestModel::class);
     }
+
+    /** @test */
+    public function it_will_throw_an_exception_when_requesting_an_argument_with_an_unknown_type()
+    {
+        $this->expectException(CouldNotDetermineValue::class);
+
+        $this->argumentValueProvider->getValue('argument name', 'invalid type name');
+    }
 }

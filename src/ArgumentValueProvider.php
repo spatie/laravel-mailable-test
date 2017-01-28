@@ -2,6 +2,7 @@
 
 namespace Spatie\MailableTest;
 
+use Exception;
 use Faker\Generator;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MailableTest\Exceptions\CouldNotDetermineValue;
@@ -16,6 +17,13 @@ class ArgumentValueProvider
         $this->faker = $faker;
     }
 
+    /**
+     * @param string $argumentName
+     * @param string $argumentType
+     * @return mixed
+     *
+     * @throws \Spatie\MailableTest\Exceptions\CouldNotDetermineValue
+     */
     public function getValue(string $argumentName, string $argumentType = '')
     {
         if ($argumentType === 'int') {
@@ -30,17 +38,20 @@ class ArgumentValueProvider
             return $this->faker->boolean(50);
         }
 
-
-        $argumentValue = app($argumentType);
+        try {
+            $argumentValue = app($argumentType);
+        } catch (Exception $exception) {
+            throw CouldNotDetermineValue::create($argumentType, $argumentName, $exception);
+        }
 
         if ($argumentValue instanceof Model) {
-            $argumentValue = $this->getModelInstance($argumentValue);
+            return $this->getModelInstance($argumentValue);
         }
 
         return $argumentValue;
     }
 
-    protected function getModelInstance(Model $model)
+    protected function getModelInstance(Model $model): Model
     {
         $modelInstance = $model->first();
 

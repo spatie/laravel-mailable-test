@@ -18,9 +18,5 @@ class MailableFactoryTest extends TestCase
                 $this->int = $integer;
             }
         };
-
-        $mailable = MailableFactory::create(get_class($mailableClass));
-
-        dd($mailable->int);
     }
 }
