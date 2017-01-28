@@ -2,23 +2,20 @@
 
 namespace Spatie\MailableTest\Test;
 
-use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class TestMailable extends Mailable
 {
     /** @var int */
     public $myInteger;
 
-    /**  @var string */
+    /** @var string */
     public $myString;
 
-    /**  @var bool */
+    /** @var bool */
     public $myBool;
 
-    /**  @var TestModel */
+    /** @var TestModel */
     public $myModel;
 
     public function __construct(
@@ -26,8 +23,7 @@ class TestMailable extends Mailable
         string $myString,
         bool $myBool,
         TestModel $myModel
-    )
-    {
+    ) {
         $this->myInteger = $myInteger;
         $this->myString = $myString;
         $this->myBool = $myBool;

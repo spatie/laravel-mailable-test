@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailable;
 
 class MailableFactory
 {
-    /**  @var \Spatie\MailableTest\ArgumentValueProvider */
+    /** @var \Spatie\MailableTest\ArgumentValueProvider */
     protected $argumentValueProvider;
 
     public function __construct(ArgumentValueProvider $argumentValueProvider)
@@ -25,7 +25,7 @@ class MailableFactory
 
         $argumentValues = $this->getArguments($mailableClass);
 
-        $mailableInstance =  new $mailableClass(...$argumentValues);
+        $mailableInstance = new $mailableClass(...$argumentValues);
 
         $mailableInstance = $this->setRecipient($mailableInstance, $toEmail);
 
@@ -40,7 +40,6 @@ class MailableFactory
 
         return collect($parameters)
             ->map(function (ReflectionParameter $reflectionParameter) {
-
                 return $this->argumentValueProvider->getValue(
                     $reflectionParameter->getName(),
                     $reflectionParameter->getType()->getName()

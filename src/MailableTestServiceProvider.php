@@ -11,7 +11,7 @@ class MailableTestServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/config/laravel-mailable-test.php' => config_path('laravel-mailable-test.php'),
+            __DIR__.'/config/laravel-mailable-test.php' => config_path('laravel-mailable-test.php'),
         ], 'config');
     }
 
@@ -19,12 +19,10 @@ class MailableTestServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/laravel-mailable-test.php', 'laravel-mailable-test');
 
-        $this->app->bind(MailableFactory::class, function() {
-
+        $this->app->bind(MailableFactory::class, function () {
             $argumentValueProviderClass = config('laravel-mailable-test.argument_value_provider_class');
 
             if (! is_a($argumentValueProviderClass, ArgumentValueProvider::class, true)) {
-
                 throw InvalidConfiguration::invalidValueProviderClass($argumentValueProviderClass);
             }
 
@@ -33,10 +31,10 @@ class MailableTestServiceProvider extends ServiceProvider
             return new MailableFactory($argumentValueProvider);
         });
 
-        $this->app->bind(ArgumentValueProvider::class, function() {
-           $faker = Factory::create();
+        $this->app->bind(ArgumentValueProvider::class, function () {
+            $faker = Factory::create();
 
-           return new ArgumentValueProvider($faker);
+            return new ArgumentValueProvider($faker);
         });
 
         $this->commands([
