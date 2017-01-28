@@ -44,7 +44,7 @@ class ArgumentValueProviderTest extends TestCase
     /** @test */
     public function it_can_resolve_a_type_bound_in_the_container()
     {
-        $this->app->bind('bound-type', function() {
+        $this->app->bind('bound-type', function () {
             return 'bound-value';
         });
 

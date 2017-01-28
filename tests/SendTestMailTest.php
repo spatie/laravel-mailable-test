@@ -2,9 +2,9 @@
 
 namespace Spatie\MailableTest\Test;
 
-use Exception;
 use Mail;
 use Artisan;
+use Exception;
 
 class SendTestMailTest extends TestCase
 {
@@ -17,7 +17,7 @@ class SendTestMailTest extends TestCase
 
         Artisan::call('mail:send-test', [
            'mailableClass' => TestMailable::class,
-           'recipient' => 'recepient@mail.com'
+           'recipient' => 'recepient@mail.com',
         ]);
 
         Mail::assertSent(TestMailable::class, function (TestMailable $mail) {
@@ -37,7 +37,7 @@ class SendTestMailTest extends TestCase
 
         Artisan::call('mail:send-test', [
             'mailableClass' => TestMailable::class,
-            'recipient' => 'invalid-mail-address'
+            'recipient' => 'invalid-mail-address',
         ]);
     }
 }
