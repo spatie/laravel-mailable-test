@@ -4,8 +4,8 @@ namespace Spatie\MailableTest;
 
 use Mail;
 use Exception;
-use Illuminate\Console\Command;
 use Validator;
+use Illuminate\Console\Command;
 
 class SendTestMail extends Command
 {

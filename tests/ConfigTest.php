@@ -17,7 +17,7 @@ class ConfigTest extends TestCase
 
         Artisan::call('mail:send-test', [
             'mailableClass' => TestMailable::class,
-            'recipient' => 'test@mail.com'
+            'recipient' => 'test@mail.com',
         ]);
     }
 }

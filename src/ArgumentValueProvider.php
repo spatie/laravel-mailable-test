@@ -9,7 +9,7 @@ use Spatie\MailableTest\Exceptions\CouldNotDetermineValue;
 
 class ArgumentValueProvider
 {
-    /** @var \Faker\Generator  */
+    /** @var \Faker\Generator */
     protected $faker;
 
     public function __construct(Generator $faker)

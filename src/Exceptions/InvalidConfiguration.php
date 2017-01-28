@@ -9,6 +9,6 @@ class InvalidConfiguration extends Exception
 {
     public static function invalidValueProviderClass(string $className)
     {
-        return new static("The `argument_value_provider_class` config value is invalid. Given class `{$className}` does not extend `" . ArgumentValueProvider::class . "`.");
+        return new static("The `argument_value_provider_class` config value is invalid. Given class `{$className}` does not extend `".ArgumentValueProvider::class.'`.');
     }
 }
