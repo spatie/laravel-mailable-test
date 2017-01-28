@@ -52,13 +52,20 @@ class MailableFactoryTest extends TestCase
             }
         };
 
-        $mailableClassInstance = $this->mailableFactory->getInstance(get_class($mailableClass));
+        $mailableClassInstance = $this->mailableFactory->getInstance(
+            get_class($mailableClass),
+            'recepient@mail.com'
+        );
 
         $this->assertInstanceOf(get_class($mailableClass), $mailableClassInstance);
-
         $this->assertTrue(is_int($mailableClassInstance->myInteger));
         $this->assertTrue(is_string($mailableClassInstance->myString));
         $this->assertTrue(is_bool($mailableClassInstance->myBool));
         $this->assertInstanceOf(TestModel::class, $mailableClassInstance->myModel);
+
+        $this->assertCount(1, $mailableClassInstance->to);
+        $this->assertEquals('recepient@mail.com', $mailableClassInstance->to[0]['address']);
+        $this->assertCount(0, $mailableClassInstance->cc);
+        $this->assertCount(0, $mailableClassInstance->bcc);
     }
 }

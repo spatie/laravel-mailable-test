@@ -5,7 +5,6 @@ namespace Spatie\MailableTest;
 use Mail;
 use Exception;
 use Illuminate\Console\Command;
-use App\Services\MailableFactory;
 
 class SendTestMail extends Command
 {
@@ -17,9 +16,12 @@ class SendTestMail extends Command
     {
         $this->guardAgainstInvalidArguments();
 
-        $mailable = app(MailableFactory::class)->create($this->argument('mailableClass'));
+        $mailable = app(MailableFactory::class)->getInstance(
+            $this->argument('mailableClass'),
+            $this->argument('recipient')
+        );
 
-        Mail::to($this->argument('recipient'))->send($mailable);
+        Mail::send($mailable);
 
         $this->comment('Mail sent!');
     }

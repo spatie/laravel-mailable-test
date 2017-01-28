@@ -5,8 +5,7 @@ namespace Spatie\MailableTest;
 use Exception;
 use ReflectionClass;
 use ReflectionParameter;
-use Illuminate\Contracts\Mail\Mailable;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Mail\Mailable;
 
 class MailableFactory
 {
@@ -18,7 +17,7 @@ class MailableFactory
         $this->argumentValueProvider = $argumentValueProvider;
     }
 
-    public function getInstance(string $mailableClass): Mailable
+    public function getInstance(string $mailableClass, string $toEmail): Mailable
     {
         if (! class_exists($mailableClass)) {
             throw new Exception("Mailable `{$mailableClass}` does not exist.");
@@ -26,7 +25,11 @@ class MailableFactory
 
         $argumentValues = $this->getArguments($mailableClass);
 
-        return new $mailableClass(...$argumentValues);
+        $mailableInstance =  new $mailableClass(...$argumentValues);
+
+        $mailableInstance = $this->setRecipient($mailableInstance, $toEmail);
+
+        return $mailableInstance;
     }
 
     public function getArguments(string $mailableClass)
@@ -43,5 +46,14 @@ class MailableFactory
                     $reflectionParameter->getType()->getName()
                 );
             });
+    }
+
+    protected function setRecipient(Mailable $mailableInstance, string $toEmail): Mailable
+    {
+        $mailableInstance->to($toEmail);
+        $mailableInstance->cc([]);
+        $mailableInstance->bcc([]);
+
+        return $mailableInstance;
     }
 }
