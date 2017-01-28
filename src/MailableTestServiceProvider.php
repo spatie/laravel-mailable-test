@@ -2,7 +2,9 @@
 
 namespace Spatie\MailableTest;
 
+use Faker\Factory;
 use Illuminate\Support\ServiceProvider;
+use Spatie\MailableTest\Exceptions\InvalidConfiguration;
 
 class MailableTestServiceProvider extends ServiceProvider
 {
@@ -21,13 +23,18 @@ class MailableTestServiceProvider extends ServiceProvider
 
             $argumentValueProviderClass = config('laravel-mailable-test.argument_value_provider_class');
 
+            if (! is_a($argumentValueProviderClass, ArgumentValueProvider::class, true)) {
+
+                throw InvalidConfiguration::invalidValueProviderClass($argumentValueProviderClass);
+            }
+
             $argumentValueProvider = app($argumentValueProviderClass);
 
             return new MailableFactory($argumentValueProvider);
         });
 
         $this->app->bind(ArgumentValueProvider::class, function() {
-           $faker = \Faker\Factory::create();
+           $faker = Factory::create();
 
            return new ArgumentValueProvider($faker);
         });
