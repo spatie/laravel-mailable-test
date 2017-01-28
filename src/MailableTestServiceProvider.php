@@ -1,11 +1,8 @@
 <?php
 
-namespace Spatie\Tail;
+namespace Spatie\MailableTest;
 
 use Illuminate\Support\ServiceProvider;
-use Spatie\MailableTest\ArgumentValueProvider;
-use Spatie\MailableTest\MailableFactory;
-use Spatie\MailableTest\SendTestMail;
 
 class MailableTestServiceProvider extends ServiceProvider
 {
@@ -18,7 +15,7 @@ class MailableTestServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->bind(MailableFactory::class, function() {
+        $this->app->bind(MailableFactory::class, function() {
             $argumentValueProviderClass = config('laravel-mailable-test.argument_value_provider_class');
 
             $argumentValueProvider = app($argumentValueProviderClass);
@@ -26,7 +23,7 @@ class MailableTestServiceProvider extends ServiceProvider
             return new MailableFactory($argumentValueProvider);
         });
 
-        $this->bind(ArgumentValueProvider::class, function() {
+        $this->app->bind(ArgumentValueProvider::class, function() {
            $faker = \Faker\Factory::create();
 
            return new ArgumentValueProvider($faker);

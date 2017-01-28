@@ -3,6 +3,7 @@
 namespace Spatie\MailableTest;
 
 use Faker\Generator;
+use Illuminate\Database\Eloquent\Model;
 
 class ArgumentValueProvider
 {

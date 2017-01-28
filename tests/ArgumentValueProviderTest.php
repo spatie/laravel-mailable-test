@@ -2,6 +2,7 @@
 
 namespace Spatie\MailableTest\Test;
 
+use Illuminate\Database\Eloquent\Model;
 use Spatie\MailableTest\ArgumentValueProvider;
 
 class ArgumentValueProviderTest extends TestCase
@@ -38,5 +39,29 @@ class ArgumentValueProviderTest extends TestCase
         $value = $this->argumentValueProvider->getValue('myBool', 'bool');
 
         $this->assertTrue(is_bool($value));
+    }
+
+    /** @test */
+    public function it_can_resolve_a_type_bound_in_the_container()
+    {
+        $this->app->bind('bound-type', function() {
+            return 'bound-value';
+        });
+
+        $value = $this->argumentValueProvider->getValue('myBool', 'bound-type');
+
+        $this->assertSame('bound-value', $value);
+    }
+
+    /** @test */
+    public function it_can_get_a_model_instance()
+    {
+        TestModel::create(['name' => 'my model']);
+
+        $value = $this->argumentValueProvider->getValue('myModel', TestModel::class);
+
+        $this->assertInstanceOf(TestModel::class, $value);
+
+        $this->assertEquals('my model', $value->name);
     }
 }
