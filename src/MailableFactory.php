@@ -26,7 +26,7 @@ class MailableFactory
 
         $argumentValues = $this->getArguments($mailableClass);
 
-        return new $this->mailableClass(...$argumentValues);
+        return new $mailableClass(...$argumentValues);
     }
 
     public function getArguments(string $mailableClass)
