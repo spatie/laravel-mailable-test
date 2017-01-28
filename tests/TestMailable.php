@@ -7,9 +7,32 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-abstract class BaseMailable extends Mailable implements ShouldQueue
+class TestMailable extends Mailable
 {
-    use Queueable, SerializesModels;
+    /** @var int */
+    public $myInteger;
+
+    /**  @var string */
+    public $myString;
+
+    /**  @var bool */
+    public $myBool;
+
+    /**  @var TestModel */
+    public $myModel;
+
+    public function __construct(
+        int $myInteger,
+        string $myString,
+        bool $myBool,
+        TestModel $myModel
+    )
+    {
+        $this->myInteger = $myInteger;
+        $this->myString = $myString;
+        $this->myBool = $myBool;
+        $this->myModel = $myModel;
+    }
 
     /**
      * Build the message.

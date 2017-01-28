@@ -5,6 +5,7 @@ namespace Spatie\MailableTest;
 use Mail;
 use Exception;
 use Illuminate\Console\Command;
+use Validator;
 
 class SendTestMail extends Command
 {
@@ -26,9 +27,13 @@ class SendTestMail extends Command
         $this->comment('Mail sent!');
     }
 
-    public function guardAgainstInvalidArguments(): void
+    public function guardAgainstInvalidArguments()
     {
-        if (! validate($this->argument('recipient'), 'email')) {
+        $validator = Validator::make(
+            ['email' => $this->argument('recipient')],
+            ['email' => 'email']);
+
+        if (! $validator->passes()) {
             throw new Exception("`{$this->argument('recipient')}` is not a valid e-mail address");
         }
     }

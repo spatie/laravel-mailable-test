@@ -22,42 +22,15 @@ class MailableFactoryTest extends TestCase
     }
 
     /** @test */
-    public function it_test()
+    public function it_can_create_a_mailable()
     {
-        $mailableClass = new class extends BaseMailable
-        {
-            /** @var int */
-            public $myInteger = null;
-
-            /**  @var string */
-            public $myString = null;
-
-            /**  @var bool */
-            public $myBool = null;
-
-            /**  @var TestModel */
-            public $myModel = null;
-
-            public function __construct(
-                int $myInteger = null,
-                string $myString = null,
-                bool $myBool = null,
-                TestModel $myModel = null
-            )
-            {
-                $this->myInteger = $myInteger;
-                $this->myString = $myString;
-                $this->myBool = $myBool;
-                $this->myModel = $myModel;
-            }
-        };
-
         $mailableClassInstance = $this->mailableFactory->getInstance(
-            get_class($mailableClass),
+            TestMailable::class,
             'recepient@mail.com'
         );
 
-        $this->assertInstanceOf(get_class($mailableClass), $mailableClassInstance);
+        $this->assertInstanceOf(TestMailable::class, $mailableClassInstance);
+
         $this->assertTrue(is_int($mailableClassInstance->myInteger));
         $this->assertTrue(is_string($mailableClassInstance->myString));
         $this->assertTrue(is_bool($mailableClassInstance->myBool));
