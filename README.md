@@ -8,7 +8,13 @@
 [![StyleCI](https://styleci.io/repos/80032119/shield?branch=master)](https://styleci.io/repos/80032119)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-mailable-test.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-mailable-test)
 
+This package provides an artisan command that can send a mailable to an mail-address. It can be used like this:
 
+```php
+mail:send-test "App\Mail\MyMailable" recipent@mail.com
+```
+
+The given mailable will be sent to the given recipient. Any parameters the `__construct` method of the mailable class expect will be generated.
 
 ## Postcardware
 
@@ -20,25 +26,43 @@ The best postcards will get published on the open source page on our website.
 
 ## Installation
 
-**Note:** Remove this paragraph if you are building a public package  
-This package is custom built for [Spatie](https://spatie.be) projects and is therefore not registered on packagist. In order to install it via composer you must specify this extra repository in `composer.json`:
-
-```json
-"repositories": [ { "type": "composer", "url": "https://satis.spatie.be/" } ]
-```
-
 You can install the package via composer:
 
 ``` bash
 composer require spatie/laravel-mailable-test
 ```
 
+Next, you must install the service provider:
+
+```php
+// config/app.php
+'providers' => [
+    ...
+    Spatie\MailableTest\MailableTestServiceProvider::class,
+];
+```
+
+You can publish the config-file with:
+```bash
+php artisan vendor:publish --provider="Spatie\MailableTest\MailableTestServiceProvider" --tag="config"
+```
+
+This is the contents of the published config file:
+
+```php
+return [
+    
+    /**
+     * This class will be used to generate argument values for the constructor
+     * of a mailable. This can be any class as long as it 
+     * extends \Spatie\MailableTest\ArgumentValueProvider::class
+     */
+    'argument_value_provider_class' => \Spatie\MailableTest\ArgumentValueProvider::class,
+];
+```
+
 ## Usage
 
-``` php
-$mailableTest = new Spatie\MailableTest();
-echo $mailableTest->echoPhrase('Hello, Spatie!');
-```
 
 ## Changelog
 
