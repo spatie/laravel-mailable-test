@@ -10,76 +10,38 @@ use Illuminate\Database\Eloquent\Model;
 
 class MailableFactory
 {
-    /** @var string */
-    public $mailableClass;
+    /**  @var \Spatie\MailableTest\ArgumentValueProvider */
+    protected $argumentValueProvider;
 
-    public static function create(string $mailableClass): Mailable
+    public function __construct(ArgumentValueProvider $argumentValueProvider)
     {
-        return (new static ($mailableClass))->getInstance();
+        $this->argumentValueProvider = $argumentValueProvider;
     }
 
-    public function __construct(string $mailableClass)
+    public function getInstance(string $mailableClass): Mailable
     {
         if (! class_exists($mailableClass)) {
             throw new Exception("Mailable `{$mailableClass}` does not exist.");
         }
 
-        $this->mailableClass = $mailableClass;
-    }
-
-    public function getInstance(): Mailable
-    {
-        $argumentValues = $this->getArguments();
+        $argumentValues = $this->getArguments($mailableClass);
 
         return new $this->mailableClass(...$argumentValues);
     }
 
-    public function getArguments()
+    public function getArguments(string $mailableClass)
     {
-        $parameters = (new ReflectionClass($this->mailableClass))
+        $parameters = (new ReflectionClass($mailableClass))
             ->getConstructor()
             ->getParameters();
 
         return collect($parameters)
             ->map(function (ReflectionParameter $reflectionParameter) {
-                return $this->getArgumentValue(
+
+                return $this->argumentValueProvider->getValue(
+                    $reflectionParameter->getName(),
                     $reflectionParameter->getType()->getName()
                 );
             });
-    }
-
-    public function getArgumentValue(string $type, string $argumentName)
-    {
-        if ($type === 'int') {
-            return faker()->numberBetween(1, 100);
-        }
-
-        if ($type === 'string') {
-            return faker()->sentence();
-        }
-
-        if ($type === 'bool') {
-            return faker()->sometimes();
-        }
-
-        $argumentValue = app($type);
-
-        if ($argumentValue instanceof Model) {
-            $argumentValue = $this->getModelInstance($argumentValue);
-        }
-
-        return $argumentValue;
-    }
-
-    public function getModelInstance(Model $model)
-    {
-        $model = $model->first();
-
-        if (! $model) {
-            $modelClass = get_class($model);
-            throw new Exception("Could not find a model of class `{$modelClass}`.");
-        }
-
-        return $model;
     }
 }

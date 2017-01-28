@@ -29,8 +29,6 @@ abstract class TestCase extends Orchestra
 
     protected function setUpDatabase()
     {
-        include_once __DIR__.'/../database/migrations/create_monitors_table.php.stub';
 
-        (new \CreateMonitorsTable())->up();
     }
 }

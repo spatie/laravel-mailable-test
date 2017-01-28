@@ -9,7 +9,7 @@ use App\Services\MailableFactory;
 
 class SendTestMail extends Command
 {
-    protected $signature = 'mail:fake {mailableClass} {recipient}';
+    protected $signature = 'mail:send-test {mailableClass} {recipient}';
 
     protected $description = 'Send a test email';
 
@@ -17,7 +17,7 @@ class SendTestMail extends Command
     {
         $this->guardAgainstInvalidArguments();
 
-        $mailable = MailableFactory::create($this->argument('mailableClass'));
+        $mailable = app(MailableFactory::class)->create($this->argument('mailableClass'));
 
         Mail::to($this->argument('recipient'))->send($mailable);
 

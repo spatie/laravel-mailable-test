@@ -2,11 +2,25 @@
 
 namespace Spatie\MailableTest\Test;
 
+use Spatie\MailableTest\MailableFactory;
+
 class MailableFactoryTest extends TestCase
 {
     /** @test */
     public function it_test()
     {
-        $this->assertTrue(true);
+        $mailableClass = new class extends BaseMailable {
+
+            public $int = 0;
+
+            public function __construct(int $integer = 0)
+            {
+                $this->int = $integer;
+            }
+        };
+
+        $mailable = MailableFactory::create(get_class($mailableClass));
+
+        dd($mailable->int);
     }
 }

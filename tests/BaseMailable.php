@@ -11,13 +11,6 @@ abstract class BaseMailable extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    public $parameters = [];
-
-    public function __construct(array $parameters)
-    {
-        $this->parameters = $parameters;
-    }
-
     /**
      * Build the message.
      *
