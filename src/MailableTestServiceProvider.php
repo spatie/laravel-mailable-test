@@ -15,7 +15,10 @@ class MailableTestServiceProvider extends ServiceProvider
 
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__.'/../config/laravel-mailable-test.php', 'laravel-mailable-test');
+
         $this->app->bind(MailableFactory::class, function() {
+
             $argumentValueProviderClass = config('laravel-mailable-test.argument_value_provider_class');
 
             $argumentValueProvider = app($argumentValueProviderClass);

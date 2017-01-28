@@ -2,8 +2,6 @@
 
 namespace Spatie\MailableTest\Test;
 
-use Mockery;
-use Spatie\MailableTest\ArgumentValueProvider;
 use Spatie\MailableTest\MailableFactory;
 
 class MailableFactoryTest extends TestCase
@@ -18,14 +16,9 @@ class MailableFactoryTest extends TestCase
     {
         parent::setUp();
 
-        $this->argumentValueProvider = Mockery::mock(ArgumentValueProvider::class);
+        TestModel::create(['name' => 'my name']);
 
-        $this->mailableFactory = new MailableFactory($this->argumentValueProvider);
-    }
-
-    public function tearDown()
-    {
-        Mockery::close();
+        $this->mailableFactory = app(MailableFactory::class);
     }
 
     /** @test */
@@ -33,20 +26,39 @@ class MailableFactoryTest extends TestCase
     {
         $mailableClass = new class extends BaseMailable
         {
-            public $int = 0;
+            /** @var int */
+            public $myInteger = null;
 
-            public function __construct(int $integer = 0)
+            /**  @var string */
+            public $myString = null;
+
+            /**  @var bool */
+            public $myBool = null;
+
+            /**  @var TestModel */
+            public $myModel = null;
+
+            public function __construct(
+                int $myInteger = null,
+                string $myString = null,
+                bool $myBool = null,
+                TestModel $myModel = null
+            )
             {
-                $this->int = $integer;
+                $this->myInteger = $myInteger;
+                $this->myString = $myString;
+                $this->myBool = $myBool;
+                $this->myModel = $myModel;
             }
         };
 
-        $this->argumentValueProvider
-            ->shouldReceive('getValue')
-            ->withArgs(['integer', 'int'])
-            ->once()
-            ->andReturn('1');
+        $mailableClassInstance = $this->mailableFactory->getInstance(get_class($mailableClass));
 
-        $this->mailableFactory->getInstance(get_class($mailableClass));
+        $this->assertInstanceOf(get_class($mailableClass), $mailableClassInstance);
+
+        $this->assertTrue(is_int($mailableClassInstance->myInteger));
+        $this->assertTrue(is_string($mailableClassInstance->myString));
+        $this->assertTrue(is_bool($mailableClassInstance->myBool));
+        $this->assertInstanceOf(TestModel::class, $mailableClassInstance->myModel);
     }
 }
