@@ -36,7 +36,6 @@ class MailableFactoryTest extends TestCase
         $this->assertCount(0, $mailableClassInstance->bcc);
     }
 
-
     /** @test */
     public function it_can_create_a_mailable_without_giving_default_values()
     {
@@ -57,7 +56,7 @@ class MailableFactoryTest extends TestCase
     /** @test */
     public function it_can_create_a_mailable_with_the_given_default_values()
     {
-        foreach(range(1,10) as $i) {
+        foreach (range(1, 10) as $i) {
             TestModel::create(['name' => "model{$i}"]);
         }
 
@@ -68,7 +67,7 @@ class MailableFactoryTest extends TestCase
                 'myInteger' => '2',
                 'myString' => 'i am a string',
                 'myBool' => 'false',
-                'myModel' => 6
+                'myModel' => 6,
             ]
         );
 
@@ -80,5 +79,4 @@ class MailableFactoryTest extends TestCase
         $this->assertInstanceOf(TestModel::class, $mailableClassInstance->myModel);
         $this->assertEquals(6, $mailableClassInstance->myModel->id);
     }
-
 }
