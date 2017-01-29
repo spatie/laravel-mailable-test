@@ -2,10 +2,10 @@
 
 namespace Spatie\MailableTest;
 
-use InvalidArgumentException;
 use Mail;
 use Exception;
 use Validator;
+use InvalidArgumentException;
 use Illuminate\Console\Command;
 
 class SendTestMail extends Command
@@ -35,7 +35,7 @@ class SendTestMail extends Command
             ['email' => $this->argument('recipient')],
             ['email' => 'email']);
 
-        if (!$validator->passes()) {
+        if (! $validator->passes()) {
             throw new Exception("`{$this->argument('recipient')}` is not a valid e-mail address");
         }
     }
@@ -50,7 +50,6 @@ class SendTestMail extends Command
 
         return collect($values)
             ->mapWithKeys(function (string $value) {
-
                 $values = explode(':', $value);
 
                 if (count($values) != 2) {

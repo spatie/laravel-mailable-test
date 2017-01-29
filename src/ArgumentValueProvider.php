@@ -38,6 +38,7 @@ class ArgumentValueProvider
 
         if ($argumentType === 'bool') {
             $defaultValue = ($defaultValue == 'false' ? false : $defaultValue);
+
             return $defaultValue ?? $this->faker->boolean(50);
         }
 
@@ -63,7 +64,7 @@ class ArgumentValueProvider
      * @return \Illuminate\Database\Eloquent\Model
      * @throws \Spatie\MailableTest\Exceptions\CouldNotDetermineValue
      */
-    protected function getModelInstance(string $mailableClass, string $argumentName, Model $model,  $id): Model
+    protected function getModelInstance(string $mailableClass, string $argumentName, Model $model, $id): Model
     {
         $modelInstance = $id ? $model->find($id) : $model->first();
 
