@@ -3,7 +3,6 @@
 namespace Spatie\MailableTest;
 
 use Mail;
-use Exception;
 use Validator;
 use InvalidArgumentException;
 use Illuminate\Console\Command;
