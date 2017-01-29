@@ -48,20 +48,22 @@ class ArgumentValueProvider
         }
 
         if ($argumentValue instanceof Model) {
-            return $this->getModelInstance($argumentValue, $id = $defaultValue);
+            return $this->getModelInstance($mailableClass, $argumentName, $argumentValue, $id = $defaultValue);
         }
 
         return $argumentValue;
     }
 
     /**
+     * @param string $mailableClass
+     * @param string $argumentName
      * @param \Illuminate\Database\Eloquent\Model $model
      * @param string|int|null $id
      *
      * @return \Illuminate\Database\Eloquent\Model
      * @throws \Spatie\MailableTest\Exceptions\CouldNotDetermineValue
      */
-    protected function getModelInstance(Model $model,  $id): Model
+    protected function getModelInstance(string $mailableClass, string $argumentName, Model $model,  $id): Model
     {
         $modelInstance = $id ? $model->find($id) : $model->first();
 
