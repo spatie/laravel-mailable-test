@@ -39,8 +39,9 @@ class MailableFactory
             ->getParameters();
 
         return collect($parameters)
-            ->map(function (ReflectionParameter $reflectionParameter) {
+            ->map(function (ReflectionParameter $reflectionParameter) use ($mailableClass) {
                 return $this->argumentValueProvider->getValue(
+                    $mailableClass,
                     $reflectionParameter->getName(),
                     $reflectionParameter->getType()->getName()
                 );

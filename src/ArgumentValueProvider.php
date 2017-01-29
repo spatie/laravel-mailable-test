@@ -18,13 +18,14 @@ class ArgumentValueProvider
     }
 
     /**
+     * @param string $mailableClass
      * @param string $argumentName
      * @param string $argumentType
-     * @return mixed
      *
+     * @return mixed
      * @throws \Spatie\MailableTest\Exceptions\CouldNotDetermineValue
      */
-    public function getValue(string $argumentName, string $argumentType = '')
+    public function getValue(string $mailableClass, string $argumentName, string $argumentType = '')
     {
         if ($argumentType === 'int') {
             return $this->faker->numberBetween(1, 100);
