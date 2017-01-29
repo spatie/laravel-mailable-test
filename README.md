@@ -13,7 +13,7 @@ Do you have to fill out an entire form just to test a mail sent by your app? Or 
 This package provides an artisan command that can send a mailable to an mail-address. It can be used like this:
 
 ```bash
-php artisan mail:send-test "App\Mail\MyMailable" recipent@mail.com
+php artisan mail:send-test "App\Mail\MyMailable" recipient@mail.com
 ```
 
 The given mailable will be sent to the given recipient. Any parameters the `__construct` method of the mailable class expect will be automagically passed in.
