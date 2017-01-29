@@ -2,6 +2,7 @@
 
 namespace Spatie\MailableTest;
 
+use InvalidArgumentException;
 use Mail;
 use Exception;
 use Validator;
@@ -9,7 +10,7 @@ use Illuminate\Console\Command;
 
 class SendTestMail extends Command
 {
-    protected $signature = 'mail:send-test {mailableClass} {recipient} {--values}';
+    protected $signature = 'mail:send-test {mailableClass} {recipient} {--values=}';
 
     protected $description = 'Send a test email';
 
@@ -34,13 +35,30 @@ class SendTestMail extends Command
             ['email' => $this->argument('recipient')],
             ['email' => 'email']);
 
-        if (! $validator->passes()) {
+        if (!$validator->passes()) {
             throw new Exception("`{$this->argument('recipient')}` is not a valid e-mail address");
         }
     }
 
     protected function getValues(): array
     {
-        return [];
+        if (! $this->option('values')) {
+            return [];
+        }
+
+        $values = explode(',', $this->option('values'));
+
+        return collect($values)
+            ->mapWithKeys(function (string $value) {
+
+                $values = explode(':', $value);
+
+                if (count($values) != 2) {
+                    throw new InvalidArgumentException("The given value for the option 'values' `{$this->option('values')}` is not valid.");
+                }
+
+                return [$values[0] => $values[1]];
+            })
+            ->toArray();
     }
 }
