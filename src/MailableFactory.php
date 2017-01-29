@@ -43,7 +43,7 @@ class MailableFactory
                 return $this->argumentValueProvider->getValue(
                     $mailableClass,
                     $reflectionParameter->getName(),
-                    $reflectionParameter->getType()->getName(),
+                    (string)$reflectionParameter->getType(),
                     $defaultValues[$reflectionParameter->getName()] ?? null
                 );
             });
