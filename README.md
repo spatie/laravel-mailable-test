@@ -8,7 +8,7 @@
 [![StyleCI](https://styleci.io/repos/80032119/shield?branch=master)](https://styleci.io/repos/80032119)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-mailable-test.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-mailable-test)
 
-Do you have to fill out an entire form just to test a mail that should be sent by your app? Or even worse complete an entire checkout process to just view and debug the order confirmation mail? No more!
+Do you have to fill out an entire form just to test a mail that should be sent by your app? Or even worse complete an entire checkout process to just view and debug an order confirmation mail? No more!
 
 This package provides an artisan command that can send a mailable to an mail-address. It can be used like this:
 
@@ -16,7 +16,7 @@ This package provides an artisan command that can send a mailable to an mail-add
 php artisan mail:send-test "App\Mail\MyMailable" recipent@mail.com
 ```
 
-The given mailable will be sent to the given recipient. Any parameters the `__construct` method of the mailable class expect will be generated.
+The given mailable will be sent to the given recipient. Any parameters the `__construct` method of the mailable class expect will be automagically passed in.
 
 ## Postcardware
 
@@ -77,6 +77,11 @@ The package will provide a value for any typehinted argument of the constructor 
 
 ## Customizing the values passed to the mailable constructor
 
+The easiest way to customize the values passed to the mailable constructor is to use the `values` option of the `mail:send-test` command. Here's an example.
+
+```php
+php artisan mail:send-test "App\Mail\MyMailable" recipent@mail.com --values="title:My title,model:5"
+```
 
 
 
