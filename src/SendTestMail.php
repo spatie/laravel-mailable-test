@@ -26,7 +26,7 @@ class SendTestMail extends Command
 
         Mail::send($mailable);
 
-        $this->comment('Mail sent!');
+        $this->comment("Mail sent to {$this->argument('recipient')}!");
     }
 
     public function guardAgainstInvalidArguments()
@@ -36,7 +36,11 @@ class SendTestMail extends Command
             ['email' => 'email']);
 
         if (! $validator->passes()) {
-            throw new Exception("`{$this->argument('recipient')}` is not a valid e-mail address");
+            throw new InvalidArgumentException("`{$this->argument('recipient')}` is not a valid e-mail address");
+        }
+
+        if (! class_exists($this->argument('mailableClass'))) {
+            throw new InvalidArgumentException("Mailable `{$this->argument('mailableClass')}` does not exist.");
         }
     }
 
