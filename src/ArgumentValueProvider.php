@@ -21,22 +21,24 @@ class ArgumentValueProvider
      * @param string $mailableClass
      * @param string $argumentName
      * @param string $argumentType
+     * @param string|null $defaultValue
      *
      * @return mixed
      * @throws \Spatie\MailableTest\Exceptions\CouldNotDetermineValue
      */
-    public function getValue(string $mailableClass, string $argumentName, string $argumentType = '')
+    public function getValue(string $mailableClass, string $argumentName, string $argumentType = '', $defaultValue = null)
     {
         if ($argumentType === 'int') {
-            return $this->faker->numberBetween(1, 100);
+            return $defaultValue ?? $this->faker->numberBetween(1, 100);
         }
 
         if ($argumentType === 'string') {
-            return $this->faker->sentence();
+            return $defaultValue ?? $this->faker->sentence();
         }
 
         if ($argumentType === 'bool') {
-            return $this->faker->boolean(50);
+            $defaultValue = ($defaultValue == 'false' ? false : $defaultValue);
+            return $defaultValue ?? $this->faker->boolean(50);
         }
 
         try {
@@ -46,15 +48,22 @@ class ArgumentValueProvider
         }
 
         if ($argumentValue instanceof Model) {
-            return $this->getModelInstance($argumentValue);
+            return $this->getModelInstance($argumentValue, $id = $defaultValue);
         }
 
         return $argumentValue;
     }
 
-    protected function getModelInstance(Model $model): Model
+    /**
+     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param string|int|null $id
+     *
+     * @return \Illuminate\Database\Eloquent\Model
+     * @throws \Spatie\MailableTest\Exceptions\CouldNotDetermineValue
+     */
+    protected function getModelInstance(Model $model,  $id): Model
     {
-        $modelInstance = $model->first();
+        $modelInstance = $id ? $model->find($id) : $model->first();
 
         if (! $modelInstance) {
             throw CouldNotDetermineValue::noModelInstanceFound($model);

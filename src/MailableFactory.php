@@ -17,13 +17,13 @@ class MailableFactory
         $this->argumentValueProvider = $argumentValueProvider;
     }
 
-    public function getInstance(string $mailableClass, string $toEmail): Mailable
+    public function getInstance(string $mailableClass, string $toEmail, $defaultValues): Mailable
     {
         if (! class_exists($mailableClass)) {
             throw new Exception("Mailable `{$mailableClass}` does not exist.");
         }
 
-        $argumentValues = $this->getArguments($mailableClass);
+        $argumentValues = $this->getArguments($mailableClass, $defaultValues);
 
         $mailableInstance = new $mailableClass(...$argumentValues);
 
@@ -32,18 +32,19 @@ class MailableFactory
         return $mailableInstance;
     }
 
-    public function getArguments(string $mailableClass)
+    public function getArguments(string $mailableClass, array $defaultValues)
     {
         $parameters = (new ReflectionClass($mailableClass))
             ->getConstructor()
             ->getParameters();
 
         return collect($parameters)
-            ->map(function (ReflectionParameter $reflectionParameter) use ($mailableClass) {
+            ->map(function (ReflectionParameter $reflectionParameter) use ($mailableClass, $defaultValues) {
                 return $this->argumentValueProvider->getValue(
                     $mailableClass,
                     $reflectionParameter->getName(),
-                    $reflectionParameter->getType()->getName()
+                    $reflectionParameter->getType()->getName(),
+                    $defaultValues[$reflectionParameter->getName()] ?? null
                 );
             });
     }

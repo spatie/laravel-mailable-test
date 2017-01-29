@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
 
 class SendTestMail extends Command
 {
-    protected $signature = 'mail:send-test {mailableClass} {recipient}';
+    protected $signature = 'mail:send-test {mailableClass} {recipient} {--values}';
 
     protected $description = 'Send a test email';
 
@@ -19,7 +19,8 @@ class SendTestMail extends Command
 
         $mailable = app(MailableFactory::class)->getInstance(
             $this->argument('mailableClass'),
-            $this->argument('recipient')
+            $this->argument('recipient'),
+            $this->getValues()
         );
 
         Mail::send($mailable);
@@ -36,5 +37,10 @@ class SendTestMail extends Command
         if (! $validator->passes()) {
             throw new Exception("`{$this->argument('recipient')}` is not a valid e-mail address");
         }
+    }
+
+    protected function getValues(): array
+    {
+        return [];
     }
 }
