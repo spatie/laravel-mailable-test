@@ -44,7 +44,8 @@ Next, you must install the service provider:
 ];
 ```
 
-You can publish the config-file with:
+Optionally you can publish the config-file with:
+
 ```bash
 php artisan vendor:publish --provider="Spatie\MailableTest\MailableTestServiceProvider" --tag="config"
 ```
@@ -77,13 +78,44 @@ The package will provide a value for any typehinted argument of the constructor 
 
 ## Customizing the values passed to the mailable constructor
 
-The easiest way to customize the values passed to the mailable constructor is to use the `values` option of the `mail:send-test` command. Here's an example.
+### Via the command
+
+The easiest way to customize the values passed to the mailable constructor is to use the `values` option of the `mail:send-test` command.  Image the constructor for your mailable looks like this:
 
 ```php
-php artisan mail:send-test "App\Mail\MyMailable" recipent@mail.com --values="title:My title,model:5"
+public function __construct(string $title, Order $order) 
+{
+   ...
+}
 ```
 
+The `Order` class in this example is an eloquent model. If you don't want the package to generate fake values or use the first `Order`, you can pass a `values` option to the command. The option should get a string with comma separated pair. The first value of each pair (separated by ':') should be the name of the argument in the mailable constructor. The second value should be the value that should be passed to that argument. For arguments concerning Eloquent models, the passed value will be used as the id.
 
+So in this example `My title` will be passed to `$title` and an `Order` with id 5 will be passed to `$order`.
+
+```php
+php artisan mail:send-test "App\Mail\MyMailable" recipent@mail.com --values="title:My title,order:5"
+```
+
+### By overriding the `ArgumentValueProvider`
+
+The class that is responsible for getting values that should be passed on to the mailable constructor is `Spatie\MailableTest\ArgumentValueProvider`. You can override this class by specifying your own class in the `argument_value_provider_class` in the `laravel-mailable-test` config file.
+
+By default the package will pass the first record of an Eloquent model to each argument that typehints a model. If you want to use your factories instead, you can do this.
+ 
+```php
+namespace App;
+
+use Spatie\MailableTest\ArgumentValueProvider;
+
+class MyCustomArgumentValueProvider extends ArgumentValueProvider
+{
+       protected function getModelInstance(string $mailableClass, string $argumentName, Model $model, $id): Model
+       {
+          return factory(get_class($model));
+       }
+}
+```
 
 ## Changelog
 
