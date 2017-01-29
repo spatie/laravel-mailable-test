@@ -2,10 +2,10 @@
 
 namespace Spatie\MailableTest\Test;
 
-use InvalidArgumentException;
 use Mail;
 use Artisan;
 use Exception;
+use InvalidArgumentException;
 
 class SendTestMailTest extends TestCase
 {
