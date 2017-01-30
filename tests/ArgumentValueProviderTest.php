@@ -2,19 +2,19 @@
 
 namespace Spatie\MailableTest\Test;
 
-use Spatie\MailableTest\ArgumentValueProvider;
+use Spatie\MailableTest\FakerArgumentValueProvider;
 use Spatie\MailableTest\Exceptions\CouldNotDetermineValue;
 
 class ArgumentValueProviderTest extends TestCase
 {
-    /** @var \Spatie\MailableTest\ArgumentValueProvider */
+    /** @var \Spatie\MailableTest\FakerArgumentValueProvider */
     protected $argumentValueProvider;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->argumentValueProvider = app(ArgumentValueProvider::class);
+        $this->argumentValueProvider = app(FakerArgumentValueProvider::class);
     }
 
     /** @test */

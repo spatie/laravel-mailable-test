@@ -2,9 +2,8 @@
 
 namespace Spatie\MailableTest;
 
-use Faker\Factory;
+use Faker\Factory as Faker;
 use Illuminate\Support\ServiceProvider;
-use Spatie\MailableTest\Exceptions\InvalidConfiguration;
 
 class MailableTestServiceProvider extends ServiceProvider
 {
@@ -19,30 +18,35 @@ class MailableTestServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/laravel-mailable-test.php', 'laravel-mailable-test');
 
-        $this->app->bind(MailableFactory::class, function () {
-            $argumentValueProviderClass = config('laravel-mailable-test.argument_value_provider_class');
-
-            if (! is_a($argumentValueProviderClass, ArgumentValueProvider::class, true)) {
-                throw InvalidConfiguration::invalidValueProviderClass($argumentValueProviderClass);
-            }
-
-            $argumentValueProvider = app($argumentValueProviderClass);
-
-            return new MailableFactory($argumentValueProvider);
-        });
-
-        $this->app->bind(ArgumentValueProvider::class, function () {
-            $faker = Factory::create();
-
-            return new ArgumentValueProvider($faker);
-        });
+        $this->registerArgumentValueProvider();
+        $this->registerMailableFactory();
 
         $this->commands([
             SendTestMail::class,
         ]);
     }
 
-    public function provides()
+    protected function registerArgumentValueProvider()
+    {
+        $this->app->singleton(ArgumentValueProvider::class, function () {
+            return new FakerArgumentValueProvider(
+                Faker::create()
+            );
+        });
+    }
+
+    protected function registerMailableFactory()
+    {
+        $this->app->singleton(MailableFactory::class, function () {
+            $argumentValueProvider = app(
+                config('laravel-mailable-test.argument_value_provider_class')
+            );
+
+            return new MailableFactory($argumentValueProvider);
+        });
+    }
+
+    public function provides(): array
     {
         return ['command.mail.send.test'];
     }
