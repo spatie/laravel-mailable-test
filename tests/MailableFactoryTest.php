@@ -6,7 +6,7 @@ use Spatie\MailableTest\MailableFactory;
 
 class MailableFactoryTest extends TestCase
 {
-    /** @var \Spatie\MailableTest\ArgumentValueProvider|\Mockery\MockInterface */
+    /** @var \Spatie\MailableTest\FakerArgumentValueProvider|\Mockery\MockInterface */
     protected $argumentValueProvider;
 
     /** @var \Spatie\MailableTest\MailableFactory */

@@ -28,11 +28,12 @@ class SendTestMail extends Command
         $this->comment("Mail sent to {$this->argument('recipient')}!");
     }
 
-    public function guardAgainstInvalidArguments()
+    protected function guardAgainstInvalidArguments()
     {
         $validator = Validator::make(
             ['email' => $this->argument('recipient')],
-            ['email' => 'email']);
+            ['email' => 'email']
+        );
 
         if (! $validator->passes()) {
             throw new InvalidArgumentException("`{$this->argument('recipient')}` is not a valid e-mail address");
