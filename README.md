@@ -99,16 +99,16 @@ php artisan mail:send-test "App\Mail\MyMailable" recipient@mail.com --values="ti
 
 ### By overriding the `ArgumentValueProvider`
 
-The class that is responsible for getting values that should be passed on to the mailable constructor is `Spatie\MailableTest\ArgumentValueProvider`. You can override this class by specifying your own class in the `argument_value_provider_class` in the `laravel-mailable-test` config file.
+The class that is responsible for getting values that should be passed on to the mailable constructor is `Spatie\MailableTest\FakerArgumentValueProvider`. You can override this class by specifying your own class in the `argument_value_provider_class` in the `laravel-mailable-test` config file.
 
 By default the package will pass the first record of an Eloquent model to each argument that typehints a model. If you want to use your factories instead, you can do this.
  
 ```php
 namespace App;
 
-use Spatie\MailableTest\ArgumentValueProvider;
+use Spatie\MailableTest\FakerArgumentValueProvider;
 
-class MyCustomArgumentValueProvider extends ArgumentValueProvider
+class MyCustomArgumentValueProvider extends FakerArgumentValueProvider
 {
        protected function getModelInstance(string $mailableClass, string $argumentName, Model $model, $id): Model
        {
