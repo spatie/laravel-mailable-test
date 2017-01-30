@@ -60,7 +60,7 @@ return [
      * of a mailable. This can be any class as long as it 
      * extends \Spatie\MailableTest\ArgumentValueProvider::class
      */
-    'argument_value_provider_class' => \Spatie\MailableTest\ArgumentValueProvider::class,
+    'argument_value_provider_class' => \Spatie\MailableTest\FakeArgumentValueProvider::class,
 ];
 ```
 
