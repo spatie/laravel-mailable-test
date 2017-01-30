@@ -10,40 +10,24 @@ class MailableTestServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/config/laravel-mailable-test.php' => config_path('laravel-mailable-test.php'),
+            __DIR__.'/config/mailable-test.php' => config_path('mailable-test.php'),
         ], 'config');
     }
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/laravel-mailable-test.php', 'laravel-mailable-test');
+        $this->mergeConfigFrom(__DIR__.'/../config/mailable-test.php', 'mailable-test');
 
-        $this->registerArgumentValueProvider();
-        $this->registerMailableFactory();
+        $this->app->bind(ArgumentValueProvider::class, function () {
+            $argumentValueProvider = config('mailable-test.argument_value_provider_class');
+            return new $argumentValueProvider(
+                Faker::create()
+            );
+        });
 
         $this->commands([
             SendTestMail::class,
         ]);
-    }
-
-    protected function registerArgumentValueProvider()
-    {
-        $this->app->singleton(ArgumentValueProvider::class, function () {
-            return new FakerArgumentValueProvider(
-                Faker::create()
-            );
-        });
-    }
-
-    protected function registerMailableFactory()
-    {
-        $this->app->singleton(MailableFactory::class, function () {
-            $argumentValueProvider = app(
-                config('laravel-mailable-test.argument_value_provider_class')
-            );
-
-            return new MailableFactory($argumentValueProvider);
-        });
     }
 
     public function provides(): array

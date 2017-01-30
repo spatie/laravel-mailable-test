@@ -12,7 +12,7 @@ class MailableFactory
     /** @var \Spatie\MailableTest\FakerArgumentValueProvider */
     protected $argumentValueProvider;
 
-    public function __construct(FakerArgumentValueProvider $argumentValueProvider)
+    public function __construct(ArgumentValueProvider $argumentValueProvider)
     {
         $this->argumentValueProvider = $argumentValueProvider;
     }
