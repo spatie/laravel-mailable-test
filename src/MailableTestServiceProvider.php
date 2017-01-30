@@ -20,6 +20,7 @@ class MailableTestServiceProvider extends ServiceProvider
 
         $this->app->bind(ArgumentValueProvider::class, function () {
             $argumentValueProvider = config('mailable-test.argument_value_provider_class');
+
             return new $argumentValueProvider(
                 Faker::create()
             );
