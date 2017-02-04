@@ -24,8 +24,8 @@ class SendTestMail extends Command
         );
 
         Mail::send($mailable);
-
-        $this->comment("Mail sent to {$this->argument('recipient')}!");
+        
+        $this->comment("Mailable `{$this->argument('mailableClass')}` sent to {$this->argument('recipient')}!");
     }
 
     protected function guardAgainstInvalidArguments()
