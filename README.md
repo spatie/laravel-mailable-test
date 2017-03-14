@@ -94,7 +94,7 @@ The `Order` class in this example is an eloquent model. If you don't want the pa
 So in this example `My title` will be passed to `$title` and an `Order` with id 5 will be passed to `$order`.
 
 ```php
-php artisan mail:send-test "App\Mail\OrederConfirmation" recipient@mail.com --values="title:My title,order:5"
+php artisan mail:send-test "App\Mail\OrderConfirmation" recipient@mail.com --values="title:My title,order:5"
 ```
 
 ### By overriding the `ArgumentValueProvider`
