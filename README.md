@@ -8,7 +8,7 @@
 [![StyleCI](https://styleci.io/repos/80032119/shield?branch=master)](https://styleci.io/repos/80032119)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-mailable-test.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-mailable-test)
 
-Do you have to fill out an entire form just to test a mail sent by your app? Or even worse, complete an entire checkout process to just view and debug an order confirmation mail? No more!
+Do you have to fill out an entire form just to test a mail sent by your app? Or even worse, complete an entire checkout process to just view and debug an order confirmation mail? Stop. The. Madness.
 
 This package provides an artisan command that can send a mailable to an mail-address. It can be used like this:
 
