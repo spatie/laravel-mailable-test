@@ -10,7 +10,7 @@
 
 Do you have to fill out an entire form just to test a mail sent by your app? Or even worse, complete an entire checkout process to just view and debug an order confirmation mail? Stop. The. Madness.
 
-This package provides an artisan command that can send a mailable to an mail-address. It can be used like this:
+This package provides an artisan command that can send a mailable to an email-address. It can be used like this:
 
 ```bash
 php artisan mail:send-test "App\Mail\OrderConfirmation" recipient@mail.com
