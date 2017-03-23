@@ -10,7 +10,7 @@ class MailableTestServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/config/mailable-test.php' => config_path('mailable-test.php'),
+            __DIR__.'/../config/mailable-test.php' => config_path('mailable-test.php'),
         ], 'config');
     }
 
