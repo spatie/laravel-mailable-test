@@ -2,7 +2,10 @@
 
 All notable changes to `laravel-mailable-test` will be documented in this file
 
-## 1.0.2 - 2017-0204
+## 1.0.3 - 2017-03-23
+- fixes publishing of config file
+
+## 1.0.2 - 2017-02-04
 - improve console output
 
 ## 1.0.1 - 2017-01-30
