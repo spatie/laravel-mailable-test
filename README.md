@@ -62,9 +62,9 @@ return [
     'argument_value_provider_class' => \Spatie\MailableTest\FakerArgumentValueProvider::class,
 
     /*
-     * base namespace Mailable classes
+     * Base namespace Mailable classes
      */
-    'base_namespace' => 'App\\Mails',
+    'base_namespace' => 'App\Mails',
 ];
 ```
 

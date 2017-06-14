@@ -4,7 +4,7 @@ namespace Spatie\MailableTest\Exceptions;
 
 use Exception;
 
-class MailableDoesntExist extends Exception
+class MailableDoesNotExist extends Exception
 {
     public static function withClass(string $className): self
     {

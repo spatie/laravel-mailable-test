@@ -6,7 +6,6 @@ use Mail;
 use Artisan;
 use Exception;
 use InvalidArgumentException;
-use Illuminate\Support\Facades\Config;
 
 class SendTestMailTest extends TestCase
 {
@@ -84,7 +83,7 @@ class SendTestMailTest extends TestCase
     /** @test */
     public function it_will_use_base_namespace_variable_if_class_is_not_found()
     {
-        Config::set('mailable-test.base_namespace', 'Spatie\\MailableTest\\Test');
+        config(['mailable-test.base_namespace' => 'Spatie\MailableTest\Test']);
 
         Mail::fake();
 
@@ -108,7 +107,7 @@ class SendTestMailTest extends TestCase
     /** @test */
     public function it_will_fail_if_mailable_class_is_not_found()
     {
-        Config::set('mailable-test.base_namespace', 'Spatie\\MailableTest\\TestInvalid');
+        config(['mailable-test.base_namespace' => 'Spatie\MailableTest\TestInvalid']);
 
         $this->expectException(InvalidArgumentException::class);
 
