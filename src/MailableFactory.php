@@ -5,7 +5,6 @@ namespace Spatie\MailableTest;
 use ReflectionClass;
 use ReflectionParameter;
 use Illuminate\Mail\Mailable;
-use Spatie\MailableTest\Exceptions\MailableDoesNotExist;
 
 class MailableFactory
 {
@@ -19,14 +18,6 @@ class MailableFactory
 
     public function getInstance(string $mailableClass, string $toEmail, $defaultValues): Mailable
     {
-        if (! class_exists($mailableClass)) {
-            $mailableClass = sprintf('%s\\%s', config('mailable-test.base_namespace'), $mailableClass);
-
-            if (! class_exists($mailableClass)) {
-                throw MailableDoesNotExist::withClass($mailableClass);
-            }
-        }
-
         $argumentValues = $this->getArguments($mailableClass, $defaultValues);
 
         $mailable = new $mailableClass(...$argumentValues);

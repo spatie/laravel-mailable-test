@@ -12,5 +12,5 @@ return [
     /*
      * Base namespace Mailable classes
      */
-    'base_namespace' => 'App\Mails',
+    'base_namespace' => 'App\Mail',
 ];
