@@ -2,11 +2,11 @@
 
 namespace Spatie\MailableTest\Test;
 
-use Illuminate\Support\Facades\Config;
 use Mail;
 use Artisan;
 use Exception;
 use InvalidArgumentException;
+use Illuminate\Support\Facades\Config;
 
 class SendTestMailTest extends TestCase
 {

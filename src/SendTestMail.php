@@ -68,7 +68,7 @@ class SendTestMail extends Command
     protected function vaildateMailable($mailableClass)
     {
         if (! class_exists($mailableClass)) {
-            $mailableClass = sprintf("%s\\%s", config('mailable-test.base_namespace'), $mailableClass);
+            $mailableClass = sprintf('%s\\%s', config('mailable-test.base_namespace'), $mailableClass);
 
             if (! class_exists($mailableClass)) {
                 return false;

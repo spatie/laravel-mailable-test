@@ -20,7 +20,7 @@ class MailableFactory
     public function getInstance(string $mailableClass, string $toEmail, $defaultValues): Mailable
     {
         if (! class_exists($mailableClass)) {
-            $mailableClass = sprintf("%s\\%s", config('mailable-test.base_namespace'), $mailableClass);
+            $mailableClass = sprintf('%s\\%s', config('mailable-test.base_namespace'), $mailableClass);
 
             if (! class_exists($mailableClass)) {
                 throw MailableDoesntExist::withClass($mailableClass);
