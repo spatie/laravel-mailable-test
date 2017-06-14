@@ -53,13 +53,18 @@ This is the contents of the published config file:
 
 ```php
 return [
-    
-    /**
+
+    /*
      * This class will be used to generate argument values for the constructor
-     * of a mailable. This can be any class as long as it 
+     * of a mailable. This can be any class as long as it
      * extends \Spatie\MailableTest\ArgumentValueProvider::class
      */
-    'argument_value_provider_class' => \Spatie\MailableTest\FakeArgumentValueProvider::class,
+    'argument_value_provider_class' => \Spatie\MailableTest\FakerArgumentValueProvider::class,
+
+    /*
+     * base namespace Mailable classes
+     */
+    'base_namespace' => 'App\\Mails',
 ];
 ```
 

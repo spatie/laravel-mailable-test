@@ -39,7 +39,7 @@ class SendTestMail extends Command
             throw new InvalidArgumentException("`{$this->argument('recipient')}` is not a valid e-mail address");
         }
 
-        if (! class_exists($this->argument('mailableClass'))) {
+        if (! $this->vaildateMailable($this->argument('mailableClass'))) {
             throw new InvalidArgumentException("Mailable `{$this->argument('mailableClass')}` does not exist.");
         }
     }
@@ -63,5 +63,18 @@ class SendTestMail extends Command
                 return [$values[0] => $values[1]];
             })
             ->toArray();
+    }
+
+    protected function vaildateMailable($mailableClass)
+    {
+        if (! class_exists($mailableClass)) {
+            $mailableClass = sprintf("%s\\%s", config('mailable-test.base_namespace'), $mailableClass);
+
+            if (! class_exists($mailableClass)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

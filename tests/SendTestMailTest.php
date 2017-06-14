@@ -2,6 +2,7 @@
 
 namespace Spatie\MailableTest\Test;
 
+use Illuminate\Support\Facades\Config;
 use Mail;
 use Artisan;
 use Exception;
@@ -77,6 +78,43 @@ class SendTestMailTest extends TestCase
             'mailableClass' => TestMailable::class,
             'recipient' => 'recepient@mail.com',
             '--values' => 'myInteger',
+        ]);
+    }
+
+    /** @test */
+    public function it_will_use_base_namespace_variable_if_class_is_not_found()
+    {
+        Config::set('mailable-test.base_namespace', 'Spatie\\MailableTest\\Test');
+
+        Mail::fake();
+
+        TestModel::create(['name' => 'my name']);
+
+        Artisan::call('mail:send-test', [
+            'mailableClass' => 'TestMailable',
+            'recipient' => 'recepient@mail.com',
+        ]);
+
+        Mail::assertSent(TestMailable::class, function (TestMailable $mail) {
+            $this->assertCount(1, $mail->to);
+            $this->assertEquals('recepient@mail.com', $mail->to[0]['address']);
+            $this->assertCount(0, $mail->cc);
+            $this->assertCount(0, $mail->bcc);
+
+            return true;
+        });
+    }
+
+    /** @test */
+    public function it_will_fail_if_mailable_class_is_not_found()
+    {
+        Config::set('mailable-test.base_namespace', 'Spatie\\MailableTest\\TestInvalid');
+
+        $this->expectException(InvalidArgumentException::class);
+
+        Artisan::call('mail:send-test', [
+            'mailableClass' => 'TestMailable',
+            'recipient' => 'recepient@mail.com',
         ]);
     }
 }
