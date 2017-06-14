@@ -17,7 +17,7 @@ class SendTestMail extends Command
     {
         $this->guardAgainstInvalidArguments();
 
-        $mailableClass = $this->getMailableClass($this->argument('mailableClass'));
+        $mailableClass = $this->getMailableClass();
 
         $mailable = app(MailableFactory::class)->getInstance(
             $mailableClass,
@@ -63,8 +63,10 @@ class SendTestMail extends Command
             ->toArray();
     }
 
-    protected function getMailableClass($mailableClass)
+    protected function getMailableClass()
     {
+        $mailableClass = $this->argument('mailableClass');
+
         if (! class_exists($mailableClass)) {
             $mailableClass = sprintf('%s\\%s', config('mailable-test.base_namespace'), $mailableClass);
 
