@@ -2,6 +2,9 @@
 
 All notable changes to `laravel-mailable-test` will be documented in this file
 
+## 1.1.0 - 2017-06-15
+- adds a `base_namespace` configuration option
+
 ## 1.0.3 - 2017-03-23
 - fixes publishing of config file
 
