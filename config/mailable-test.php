@@ -8,4 +8,9 @@ return [
      * extends \Spatie\MailableTest\ArgumentValueProvider::class
      */
     'argument_value_provider_class' => \Spatie\MailableTest\FakerArgumentValueProvider::class,
+
+    /*
+     * Base namespace Mailable classes
+     */
+    'base_namespace' => 'App\Mail',
 ];

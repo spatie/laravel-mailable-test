@@ -17,15 +17,17 @@ class SendTestMail extends Command
     {
         $this->guardAgainstInvalidArguments();
 
+        $mailableClass = $this->getMailableClass();
+
         $mailable = app(MailableFactory::class)->getInstance(
-            $this->argument('mailableClass'),
+            $mailableClass,
             $this->argument('recipient'),
             $this->getValues()
         );
 
         Mail::send($mailable);
 
-        $this->comment("Mailable `{$this->argument('mailableClass')}` sent to {$this->argument('recipient')}!");
+        $this->comment("Mailable `{$mailableClass}` sent to {$this->argument('recipient')}!");
     }
 
     protected function guardAgainstInvalidArguments()
@@ -37,10 +39,6 @@ class SendTestMail extends Command
 
         if (! $validator->passes()) {
             throw new InvalidArgumentException("`{$this->argument('recipient')}` is not a valid e-mail address");
-        }
-
-        if (! class_exists($this->argument('mailableClass'))) {
-            throw new InvalidArgumentException("Mailable `{$this->argument('mailableClass')}` does not exist.");
         }
     }
 
@@ -63,5 +61,20 @@ class SendTestMail extends Command
                 return [$values[0] => $values[1]];
             })
             ->toArray();
+    }
+
+    protected function getMailableClass()
+    {
+        $mailableClass = $this->argument('mailableClass');
+
+        if (! class_exists($mailableClass)) {
+            $mailableClass = sprintf('%s\\%s', config('mailable-test.base_namespace'), $mailableClass);
+
+            if (! class_exists($mailableClass)) {
+                throw new InvalidArgumentException("Mailable `{$mailableClass}` does not exist.");
+            }
+        }
+
+        return $mailableClass;
     }
 }
