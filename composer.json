@@ -18,13 +18,13 @@
     "require": {
         "php": "^7.0",
         "fzaninotto/faker": "^1.6",
-        "illuminate/contracts": "~5.4.0|~5.5.x-dev",
-        "illuminate/database": "~5.4.0|~5.5.x-dev"
+        "illuminate/contracts": "~5.4.0|~5.5.x-dev|~5.5.x-dev",
+        "illuminate/database": "~5.4.0|~5.5.x-dev|~5.5.x-dev"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.7",
-        "orchestra/database": "~3.4.0@dev|~3.5.x-dev",
-        "orchestra/testbench": "~3.4.0@dev|~3.5.x-dev",
+        "orchestra/database": "~3.4.0@dev|~3.5.x-dev|~3.5.x-dev",
+        "orchestra/testbench": "~3.4.0@dev|~3.5.x-dev|~3.5.x-dev",
         "phpunit/phpunit": "^6.2"
     },
     "autoload": {
@@ -51,3 +51,4 @@
         }
     }
 }
+
