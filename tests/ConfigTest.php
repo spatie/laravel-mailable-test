@@ -13,7 +13,7 @@ class ConfigTest extends TestCase
     {
         $this->expectException(InvalidConfiguration::class);
 
-        $this->app['config']->set('laravel-mailable-test.argument_value_provider_class', '');
+        $this->app['config']->set('mailable-test.argument_value_provider_class', '');
 
         Artisan::call('mail:send-test', [
             'mailableClass' => TestMailable::class,
