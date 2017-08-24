@@ -34,15 +34,7 @@ You can install the package via composer:
 composer require spatie/laravel-mailable-test
 ```
 
-Next, you must install the service provider:
-
-```php
-// config/app.php
-'providers' => [
-    ...
-    Spatie\MailableTest\MailableTestServiceProvider::class,
-];
-```
+The package will automatically register itself.
 
 Optionally you can publish the config-file with:
 
