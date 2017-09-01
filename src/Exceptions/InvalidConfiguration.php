@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Spatie\MailableTest\Exceptions;
 
 use Exception;
