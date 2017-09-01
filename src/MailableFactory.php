@@ -2,14 +2,13 @@
 
 namespace Spatie\MailableTest;
 
-use Exception;
 use ReflectionClass;
 use ReflectionParameter;
 use Illuminate\Mail\Mailable;
 
 class MailableFactory
 {
-    /** @var \Spatie\MailableTest\ArgumentValueProvider */
+    /** @var \Spatie\MailableTest\FakerArgumentValueProvider */
     protected $argumentValueProvider;
 
     public function __construct(ArgumentValueProvider $argumentValueProvider)
@@ -19,17 +18,13 @@ class MailableFactory
 
     public function getInstance(string $mailableClass, string $toEmail, $defaultValues): Mailable
     {
-        if (! class_exists($mailableClass)) {
-            throw new Exception("Mailable `{$mailableClass}` does not exist.");
-        }
-
         $argumentValues = $this->getArguments($mailableClass, $defaultValues);
 
-        $mailableInstance = new $mailableClass(...$argumentValues);
+        $mailable = new $mailableClass(...$argumentValues);
 
-        $mailableInstance = $this->setRecipient($mailableInstance, $toEmail);
+        $mailable = $this->setRecipient($mailable, $toEmail);
 
-        return $mailableInstance;
+        return $mailable;
     }
 
     public function getArguments(string $mailableClass, array $defaultValues)
@@ -49,12 +44,12 @@ class MailableFactory
             });
     }
 
-    protected function setRecipient(Mailable $mailableInstance, string $toEmail): Mailable
+    protected function setRecipient(Mailable $mailable, string $email): Mailable
     {
-        $mailableInstance->to($toEmail);
-        $mailableInstance->cc([]);
-        $mailableInstance->bcc([]);
+        $mailable->to($email);
+        $mailable->cc([]);
+        $mailable->bcc([]);
 
-        return $mailableInstance;
+        return $mailable;
     }
 }

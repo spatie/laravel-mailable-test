@@ -3,17 +3,16 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-mailable-test.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-mailable-test)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/spatie/laravel-mailable-test/master.svg?style=flat-square)](https://travis-ci.org/spatie/laravel-mailable-test)
-[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/c2dc5407-d2e5-4039-8798-ac3e1dba0c76.svg?style=flat-square)](https://insight.sensiolabs.com/projects/c2dc5407-d2e5-4039-8798-ac3e1dba0c76)
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/laravel-mailable-test.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/laravel-mailable-test)
 [![StyleCI](https://styleci.io/repos/80032119/shield?branch=master)](https://styleci.io/repos/80032119)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-mailable-test.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-mailable-test)
 
-Do you have to fill out an entire form just to test a mail sent by your app? Or even worse, complete an entire checkout process to just view and debug an order confirmation mail? No more!
+Do you have to fill out an entire form just to test a mail sent by your app? Or even worse, complete an entire checkout process to just view and debug an order confirmation mail? Stop. The. Madness.
 
-This package provides an artisan command that can send a mailable to an mail-address. It can be used like this:
+This package provides an artisan command that can send a mailable to an email-address. It can be used like this:
 
 ```bash
-php artisan mail:send-test "App\Mail\MyMailable" recipient@mail.com
+php artisan mail:send-test "OrderConfirmation" recipient@mail.com
 ```
 
 The given mailable will be sent to the given recipient. Any parameters the `__construct` method of the mailable class expect will be automagically passed in.
@@ -24,7 +23,7 @@ You're free to use this package (it's [MIT-licensed](LICENSE.md)), but if it mak
 
 Our address is: Spatie, Samberstraat 69D, 2060 Antwerp, Belgium.
 
-The best postcards will get published on the open source page on our website.
+The best postcards are published [on our website](https://spatie.be/en/opensource/postcards).
 
 ## Installation
 
@@ -46,13 +45,18 @@ This is the contents of the published config file:
 
 ```php
 return [
-    
-    /**
+
+    /*
      * This class will be used to generate argument values for the constructor
-     * of a mailable. This can be any class as long as it 
+     * of a mailable. This can be any class as long as it
      * extends \Spatie\MailableTest\ArgumentValueProvider::class
      */
-    'argument_value_provider_class' => \Spatie\MailableTest\ArgumentValueProvider::class,
+    'argument_value_provider_class' => \Spatie\MailableTest\FakerArgumentValueProvider::class,
+
+    /*
+     * Base namespace Mailable classes
+     */
+    'base_namespace' => 'App\Mail',
 ];
 ```
 
@@ -86,21 +90,21 @@ The `Order` class in this example is an eloquent model. If you don't want the pa
 So in this example `My title` will be passed to `$title` and an `Order` with id 5 will be passed to `$order`.
 
 ```php
-php artisan mail:send-test "App\Mail\MyMailable" recipient@mail.com --values="title:My title,order:5"
+php artisan mail:send-test "App\Mail\OrderConfirmation" recipient@mail.com --values="title:My title,order:5"
 ```
 
 ### By overriding the `ArgumentValueProvider`
 
-The class that is responsible for getting values that should be passed on to the mailable constructor is `Spatie\MailableTest\ArgumentValueProvider`. You can override this class by specifying your own class in the `argument_value_provider_class` in the `laravel-mailable-test` config file.
+The class that is responsible for getting values that should be passed on to the mailable constructor is `Spatie\MailableTest\FakerArgumentValueProvider`. You can override this class by specifying your own class in the `argument_value_provider_class` in the `laravel-mailable-test` config file.
 
 By default the package will pass the first record of an Eloquent model to each argument that typehints a model. If you want to use your factories instead, you can do this.
  
 ```php
 namespace App;
 
-use Spatie\MailableTest\ArgumentValueProvider;
+use Spatie\MailableTest\FakerArgumentValueProvider;
 
-class MyCustomArgumentValueProvider extends ArgumentValueProvider
+class MyCustomArgumentValueProvider extends FakerArgumentValueProvider
 {
        protected function getModelInstance(string $mailableClass, string $argumentName, Model $model, $id): Model
        {

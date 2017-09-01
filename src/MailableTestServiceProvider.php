@@ -2,7 +2,7 @@
 
 namespace Spatie\MailableTest;
 
-use Faker\Factory;
+use Faker\Factory as Faker;
 use Illuminate\Support\ServiceProvider;
 use Spatie\MailableTest\Exceptions\InvalidConfiguration;
 
@@ -11,7 +11,7 @@ class MailableTestServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/config/mailable-test.php' => config_path('mailable-test.php'),
+            __DIR__.'/../config/mailable-test.php' => config_path('mailable-test.php'),
         ], 'config');
     }
 
@@ -31,10 +31,13 @@ class MailableTestServiceProvider extends ServiceProvider
             return new MailableFactory($argumentValueProvider);
         });
 
-        $this->app->bind(ArgumentValueProvider::class, function () {
-            $faker = Factory::create();
 
-            return new ArgumentValueProvider($faker);
+        $this->app->bind(ArgumentValueProvider::class, function () {
+            $argumentValueProvider = config('mailable-test.argument_value_provider_class');
+
+            return new $argumentValueProvider(
+                Faker::create()
+            );
         });
 
         $this->commands([
@@ -42,7 +45,7 @@ class MailableTestServiceProvider extends ServiceProvider
         ]);
     }
 
-    public function provides()
+    public function provides(): array
     {
         return ['command.mail.send.test'];
     }

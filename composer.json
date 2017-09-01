@@ -18,14 +18,13 @@
     "require": {
         "php": "^7.0",
         "fzaninotto/faker": "^1.6",
-        "illuminate/contracts": "5.5.x-dev",
-        "illuminate/database": "5.5.x-dev"
+        "illuminate/contracts": "~5.5.0",
+        "illuminate/database": "~5.5.0"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.7",
-        "orchestra/database": "3.5.x-dev",
-        "orchestra/testbench": "3.5.x-dev",
-        "phpunit/phpunit": "^6.2"
+        "orchestra/testbench": "~3.5.0",
+        "phpunit/phpunit": "^6.3"
     },
     "autoload": {
         "psr-4": {
@@ -43,5 +42,11 @@
     "config": {
         "sort-packages": true
     },
-    "minimum-stability": "dev"
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Spatie\\MailableTest\\MailableTestServiceProvider"
+            ]
+        }
+    }
 }
