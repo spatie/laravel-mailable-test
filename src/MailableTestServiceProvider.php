@@ -31,7 +31,6 @@ class MailableTestServiceProvider extends ServiceProvider
             return new MailableFactory($argumentValueProvider);
         });
 
-
         $this->app->bind(ArgumentValueProvider::class, function () {
             $argumentValueProvider = config('mailable-test.argument_value_provider_class');
 
