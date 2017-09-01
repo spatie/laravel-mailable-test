@@ -18,14 +18,13 @@
     "require": {
         "php": "^7.0",
         "fzaninotto/faker": "^1.6",
-        "illuminate/contracts": "~5.4.0",
-        "illuminate/database": "~5.4.0"
+        "illuminate/contracts": "~5.5.0",
+        "illuminate/database": "~5.5.0"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.7",
-        "orchestra/database": "~3.4.0@dev",
-        "orchestra/testbench": "~3.4.0@dev",
-        "phpunit/phpunit": "5.*"
+        "orchestra/testbench": "~3.5.0",
+        "phpunit/phpunit": "^6.3"
     },
     "autoload": {
         "psr-4": {
