@@ -15,7 +15,7 @@ This package provides an artisan command that can send a mailable to an email-ad
 php artisan mail:send-test "OrderConfirmation" recipient@mail.com
 ```
 
-The given mailable will be sent to the given recipient. Any parameters the `__construct` method of the mailable class expect will be automagically passed in.
+The given mailable will be sent to the given recipient. Any parameters handed to the `__construct` method of the mailable class will be automatically passed in.
 
 ## Installation
 
