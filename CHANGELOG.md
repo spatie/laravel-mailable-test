@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailable-test` will be documented in this file
 
+## 2.0.1 - 2018-02-08
+
+- Support Laravel 5.6
+
 ## 2.0.0 - 2017-09-01
 
 - add support for Laravel 5.5
