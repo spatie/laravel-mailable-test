@@ -10,7 +10,7 @@ class ArgumentValueProviderTest extends TestCase
     /** @var \Spatie\MailableTest\FakerArgumentValueProvider */
     protected $argumentValueProvider;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

@@ -12,7 +12,7 @@ class MailableFactoryTest extends TestCase
     /** @var \Spatie\MailableTest\MailableFactory */
     protected $mailableFactory;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
