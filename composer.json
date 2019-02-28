@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^7.0",
+        "php": "^7.1",
         "fzaninotto/faker": "^1.6",
         "illuminate/contracts": "~5.5.0|~5.6.0|~5.7.0",
         "illuminate/database": "~5.5.0|~5.6.0|~5.7.0"
