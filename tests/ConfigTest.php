@@ -2,7 +2,6 @@
 
 namespace Spatie\MailableTest\Test;
 
-use Mail;
 use Artisan;
 use Spatie\MailableTest\Exceptions\InvalidConfiguration;
 
