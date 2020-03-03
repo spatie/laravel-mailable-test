@@ -2,9 +2,9 @@
 
 namespace Spatie\MailableTest;
 
+use Illuminate\Mail\Mailable;
 use ReflectionClass;
 use ReflectionParameter;
-use Illuminate\Mail\Mailable;
 
 class MailableFactory
 {

@@ -2,10 +2,10 @@
 
 namespace Spatie\MailableTest\Test;
 
-use Mail;
 use Artisan;
 use Exception;
 use InvalidArgumentException;
+use Mail;
 
 class SendTestMailTest extends TestCase
 {
@@ -17,8 +17,8 @@ class SendTestMailTest extends TestCase
         TestModel::create(['name' => 'my name']);
 
         Artisan::call('mail:send-test', [
-           'mailableClass' => TestMailable::class,
-           'recipient' => 'recepient@mail.com',
+            'mailableClass' => TestMailable::class,
+            'recipient' => 'recepient@mail.com',
         ]);
 
         Mail::assertSent(TestMailable::class, function (TestMailable $mail) {
