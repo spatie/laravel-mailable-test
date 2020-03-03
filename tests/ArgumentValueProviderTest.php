@@ -2,8 +2,8 @@
 
 namespace Spatie\MailableTest\Test;
 
-use Spatie\MailableTest\FakerArgumentValueProvider;
 use Spatie\MailableTest\Exceptions\CouldNotDetermineValue;
+use Spatie\MailableTest\FakerArgumentValueProvider;
 
 class ArgumentValueProviderTest extends TestCase
 {

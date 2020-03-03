@@ -2,10 +2,10 @@
 
 namespace Spatie\MailableTest;
 
+use Illuminate\Console\Command;
+use InvalidArgumentException;
 use Mail;
 use Validator;
-use InvalidArgumentException;
-use Illuminate\Console\Command;
 
 class SendTestMail extends Command
 {
