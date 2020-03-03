@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailable-test` will be documented in this file
 
+## 2.2.0 - 2020-03-03
+
+- Add Laravel 7.0 support
+
 ## 2.1.0 - 2019-09-04
 
 - Add Laravel 6.0 support
