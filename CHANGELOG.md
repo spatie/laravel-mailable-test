@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailable-test` will be documented in this file
 
+## 2.2.2 - 2020-12-17
+
+- update faker dependency
+
 ## 2.2.1 - 2020-09-09
 
 - Add Laravel 8.0 support
