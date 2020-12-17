@@ -19,7 +19,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.2",
-        "fzaninotto/faker": "^1.9",
+        "fakerphp/faker": "^1.9.1",
         "illuminate/contracts": "~5.8.0|^6.0|^7.0|^8.0",
         "illuminate/database": "~5.8.0|^6.0|^7.0|^8.0"
     },
