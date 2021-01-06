@@ -27,7 +27,7 @@ jobs:
                     -   laravel: 6.*
                         php: 8.0
                     -   laravel: 5.8.*
-                        php: 8.8
+                        php: 8.0
 
         name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
