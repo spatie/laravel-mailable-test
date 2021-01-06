@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailable-test` will be documented in this file
 
+## 2.2.3 - 2021-01-06
+
+- add PHP 8 support [#28](https://github.com/spatie/laravel-mailable-test/pull/28)
+
 ## 2.2.2 - 2020-12-17
 
 - update faker dependency
