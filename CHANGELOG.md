@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-mailable-test` will be documented in this file
 
+## 2.3.1 - 2023-01-25
+
+### What's Changed
+
+- Laravel 10.x Compatibility by @laravel-shift in https://github.com/spatie/laravel-mailable-test/pull/31
+
+**Full Changelog**: https://github.com/spatie/laravel-mailable-test/compare/2.3.0...2.3.1
+
 ## 2.3.0 - 2022-01-13
 
 ## What's Changed
