@@ -5,7 +5,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-mailable-test.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-mailable-test)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/spatie/laravel-mailable-test/run-tests.yml?branch=main&label=tests)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/spatie/laravel-mailable-test/run-tests.yml?branch=main&label=tests)](https://github.com/spatie/laravel-mailable-test/actions/workflows/run-tests.yml)
 ![Check & fix styling](https://github.com/spatie/laravel-mailable-test/workflows/Check%20&%20fix%20styling/badge.svg)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-mailable-test.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-mailable-test)
 
