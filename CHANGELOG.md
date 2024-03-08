@@ -2,6 +2,19 @@
 
 All notable changes to `laravel-mailable-test` will be documented in this file
 
+## 2.4.0 - 2024-03-08
+
+### What's Changed
+
+* docs: Fix broken test badge by @oliverearl in https://github.com/spatie/laravel-mailable-test/pull/33
+* Laravel 11.x Compatibility by @laravel-shift in https://github.com/spatie/laravel-mailable-test/pull/34
+
+### New Contributors
+
+* @oliverearl made their first contribution in https://github.com/spatie/laravel-mailable-test/pull/33
+
+**Full Changelog**: https://github.com/spatie/laravel-mailable-test/compare/2.3.1...2.4.0
+
 ## 2.3.1 - 2023-01-25
 
 ### What's Changed
