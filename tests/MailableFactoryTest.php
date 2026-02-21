@@ -3,6 +3,7 @@
 namespace Spatie\MailableTest\Test;
 
 use Spatie\MailableTest\MailableFactory;
+use PHPUnit\Framework\Attributes\Test;
 
 class MailableFactoryTest extends TestCase
 {
@@ -21,7 +22,7 @@ class MailableFactoryTest extends TestCase
         $this->mailableFactory = app(MailableFactory::class);
     }
 
-    /** @test */
+    #[Test]
     public function it_will_create_a_mailable_where_all_recepients_have_been_removed_and_the_given_recepient_added()
     {
         $mailableClassInstance = $this->mailableFactory->getInstance(
@@ -36,7 +37,7 @@ class MailableFactoryTest extends TestCase
         $this->assertCount(0, $mailableClassInstance->bcc);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_create_a_mailable_without_giving_default_values()
     {
         $mailableClassInstance = $this->mailableFactory->getInstance(
@@ -53,7 +54,7 @@ class MailableFactoryTest extends TestCase
         $this->assertInstanceOf(TestModel::class, $mailableClassInstance->myModel);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_create_a_mailable_with_the_given_default_values()
     {
         foreach (range(1, 10) as $i) {

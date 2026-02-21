@@ -6,10 +6,11 @@ use Artisan;
 use Exception;
 use InvalidArgumentException;
 use Mail;
+use PHPUnit\Framework\Attributes\Test;
 
 class SendTestMailTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_send_a_mail_without_passing_values()
     {
         Mail::fake();
@@ -31,7 +32,7 @@ class SendTestMailTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_send_a_mail_with_passing_values()
     {
         Mail::fake();
@@ -57,7 +58,7 @@ class SendTestMailTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function it_will_throw_an_exception_when_passing_an_invalid_mail_address()
     {
         $this->expectException(Exception::class);
@@ -68,7 +69,7 @@ class SendTestMailTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_will_throw_an_exception_when_passing_invalid_values()
     {
         $this->expectException(InvalidArgumentException::class);
@@ -80,7 +81,7 @@ class SendTestMailTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_will_use_base_namespace_variable_if_class_is_not_found()
     {
         config(['mailable-test.base_namespace' => 'Spatie\MailableTest\Test']);
@@ -104,7 +105,7 @@ class SendTestMailTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function it_will_fail_if_mailable_class_is_not_found()
     {
         config(['mailable-test.base_namespace' => 'Spatie\MailableTest\TestInvalid']);
