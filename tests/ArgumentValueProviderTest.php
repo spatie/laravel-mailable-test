@@ -2,9 +2,9 @@
 
 namespace Spatie\MailableTest\Test;
 
+use PHPUnit\Framework\Attributes\Test;
 use Spatie\MailableTest\Exceptions\CouldNotDetermineValue;
 use Spatie\MailableTest\FakerArgumentValueProvider;
-use PHPUnit\Framework\Attributes\Test;
 
 class ArgumentValueProviderTest extends TestCase
 {

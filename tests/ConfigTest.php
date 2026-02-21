@@ -3,8 +3,8 @@
 namespace Spatie\MailableTest\Test;
 
 use Artisan;
-use Spatie\MailableTest\Exceptions\InvalidConfiguration;
 use PHPUnit\Framework\Attributes\Test;
+use Spatie\MailableTest\Exceptions\InvalidConfiguration;
 
 class ConfigTest extends TestCase
 {

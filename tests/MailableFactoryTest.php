@@ -2,8 +2,8 @@
 
 namespace Spatie\MailableTest\Test;
 
-use Spatie\MailableTest\MailableFactory;
 use PHPUnit\Framework\Attributes\Test;
+use Spatie\MailableTest\MailableFactory;
 
 class MailableFactoryTest extends TestCase
 {
