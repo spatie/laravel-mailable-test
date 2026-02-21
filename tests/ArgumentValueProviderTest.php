@@ -2,6 +2,7 @@
 
 namespace Spatie\MailableTest\Test;
 
+use PHPUnit\Framework\Attributes\Test;
 use Spatie\MailableTest\Exceptions\CouldNotDetermineValue;
 use Spatie\MailableTest\FakerArgumentValueProvider;
 
@@ -17,7 +18,7 @@ class ArgumentValueProviderTest extends TestCase
         $this->argumentValueProvider = app(FakerArgumentValueProvider::class);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_a_string()
     {
         $value = $this->argumentValueProvider->getValue('mailableClass', 'myString', 'string');
@@ -25,7 +26,7 @@ class ArgumentValueProviderTest extends TestCase
         $this->assertTrue(is_string($value));
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_an_integer()
     {
         $value = $this->argumentValueProvider->getValue('mailableClass', 'myInt', 'int');
@@ -33,7 +34,7 @@ class ArgumentValueProviderTest extends TestCase
         $this->assertTrue(is_int($value));
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_a_boolean()
     {
         $value = $this->argumentValueProvider->getValue('mailableClass', 'myBool', 'bool');
@@ -41,7 +42,7 @@ class ArgumentValueProviderTest extends TestCase
         $this->assertTrue(is_bool($value));
     }
 
-    /** @test */
+    #[Test]
     public function it_can_resolve_a_type_bound_in_the_container()
     {
         $this->app->bind('bound-type', function () {
@@ -53,7 +54,7 @@ class ArgumentValueProviderTest extends TestCase
         $this->assertSame('bound-value', $value);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_a_model_instance()
     {
         TestModel::create(['name' => 'my model']);
@@ -65,7 +66,7 @@ class ArgumentValueProviderTest extends TestCase
         $this->assertEquals('my model', $value->name);
     }
 
-    /** @test */
+    #[Test]
     public function it_will_throw_an_exception_if_an_instance_of_model_cannot_be_determined()
     {
         $this->expectException(CouldNotDetermineValue::class);
@@ -73,7 +74,7 @@ class ArgumentValueProviderTest extends TestCase
         $this->argumentValueProvider->getValue('mailableClass', 'myModel', TestModel::class);
     }
 
-    /** @test */
+    #[Test]
     public function it_will_throw_an_exception_when_requesting_an_argument_with_an_unknown_type()
     {
         $this->expectException(CouldNotDetermineValue::class);

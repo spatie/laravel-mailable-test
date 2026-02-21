@@ -3,11 +3,12 @@
 namespace Spatie\MailableTest\Test;
 
 use Artisan;
+use PHPUnit\Framework\Attributes\Test;
 use Spatie\MailableTest\Exceptions\InvalidConfiguration;
 
 class ConfigTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_will_throw_an_exception_if_argument_value_provider_class_contains_an_invalid_class()
     {
         $this->expectException(InvalidConfiguration::class);
